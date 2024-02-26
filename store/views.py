@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.http import HttpResponse
 from django.db.models import Q
@@ -59,3 +60,5 @@ def search(request):
         'product_count': product_count,
     }
     return render(request, 'store/store.html', context)
+
+

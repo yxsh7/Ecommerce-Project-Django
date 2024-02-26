@@ -7,10 +7,13 @@ from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.core.mail import EmailMessage
-
+from carts .views import _cart_id
+from carts.models import Cart, CartItem
 from .forms import RegistrationForm
 from .models import Account
 from django.contrib import messages, auth
+
+import requests
 
 # Create your views here.
 def register(request):
@@ -58,9 +61,31 @@ def login(request):
         user = auth.authenticate(email=email, password=password)
 
         if user is not None:
+            try:
+                cart = Cart.objects.get(cart_id=_cart_id(request))
+                is_cart_item_exists = CartItem.objects.filter(cart=cart).exists()
+                if is_cart_item_exists:
+                    cart_item = CartItem.objects.filter(cart=cart)
+
+                    for item in cart_item:
+                        item.user = user
+                        item.save()
+            except:
+                pass
             auth.login(request, user)
             messages.success(request, 'You are now logged in')
-            return redirect('dashboard')
+            url = request.META.get('HTTP_REFERER')
+            try:
+                query = requests.utils.urlparse(url).query
+                #print('query:', query)
+                params = dict(x.split('=') for x in query.split('&'))
+                if 'next' in params:
+                    nextPage =  params['next']
+                    return redirect(nextPage)
+                #print('params: ',params)
+            except:
+                return redirect('dashboard')
+
         else:
             messages.error(request, 'Invalid Login Credentials')
             return redirect('login')
