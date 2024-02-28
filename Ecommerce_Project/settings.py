@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'accounts',
     'store',
     'carts',
+    'orders',
 ]
 
 MIDDLEWARE = [
@@ -114,7 +115,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Kolkata'
 
 USE_I18N = True
 
@@ -149,3 +150,8 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'yashkamthe2021.it@mmcoe.edu.in'
 EMAIL_HOST_PASSWORD = 'ishapower@1'
 EMAIL_USE_TLS = True
+
+
+SECURE_BROWSER_XSS_FILTER = True
+
+SECURE_CROSS_ORIGIN_OPENER_POLICY = 'same-origin-allow-popups'
