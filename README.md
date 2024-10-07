@@ -20,7 +20,7 @@ Use Git to clone the project repository to your local machine:
 
 ```bash
 git clone https://github.com/yxsh7/Ecommerce-Project-Django
-cd your-ecommerce-project
+cd Ecommerce-Project-Django
 ```
 
 ### 2. Set Up a Virtual Environment
