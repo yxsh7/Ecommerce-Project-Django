@@ -19,7 +19,7 @@ Ensure you have the following installed on your machine before proceeding:
 Use Git to clone the project repository to your local machine:
 
 ```bash
-git clone https://github.com/yxsh7/Ecommerce-Project-Django
+git clone https://github.com/yxsh7/Ecommerce-Project-Django.git
 cd Ecommerce-Project-Django
 ```
 
